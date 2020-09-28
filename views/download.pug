@@ -1,0 +1,21 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title LinkyShare | #{title}
+  link(rel='stylesheet' href='/css/download-style.css')
+h1.logo Linky
+  span.logoText Share
+section.download
+  img.download__icon(src='/img/download-sd.svg' alt='inshare-download')
+  if error
+    h4 #{error} 
+  else  
+    h2 Your file is ready to download
+    p Link expires in 24 hours
+    .download__meta
+      h4  #{fileName} 
+      small #{parseInt(fileSize/1000)} KB
+    .send-btn-container
+      a(href=`${downloadLink}`) Download file

@@ -1,0 +1,44 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title LinkyShare | #{title}
+  link(rel='stylesheet' href='/css/style.css')
+h1.logo Linky
+  span.logoText Share  
+section.upload-container
+  .drop-zone
+    .icon-container
+      img.center(src='/img/file.svg' alt='file-icon' draggable='false')
+      img.left(src='/img/file.svg' alt='file-icon' draggable='false')
+      img.right(src='/img/file.svg' alt='file-icon' draggable='false')
+    input#fileInput(type='file')
+    .title
+      | Drop your files here or 
+      span.browse-btn Browse
+  .progress-container
+    .bg-progress
+    .inner-container
+      .title Your file is uploading... 
+      .percent-container
+        span#percent 
+      .progress-bar     
+  .share-container
+    p.expire Link expires in 24 hours
+    .input-container
+      input#fileUrlInput(type="text", name="fileUrl" readonly="true")
+      img#copyBtn(src="/img/content_copy.svg", alt="Copy link" draggable='false')
+    p.sendViaEmail Or Send Via Email  
+    .email-container
+      form#emailForm()
+        .field
+          label(for="senderEmail") Your email
+          input#senderEmail(type="email", name="senderEmail" required="true")
+        .field
+          label(for="receiverEmail") Receiver's email
+          input#receiverEmail(type="email", name="receiverEmail" required="true")  
+        button(type="submit") Send 
+.upload-vector
+.toast 
+script(src='/js/bundler.js')
