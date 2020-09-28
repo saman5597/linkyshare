@@ -78,9 +78,23 @@ router.post('/send', async (req,res) => {
         to: receiverEmail, 
         subject: 'LinkyShare File Sharing',
         text: `${senderEmail} shared a file with you.`,
-        html: require('../util/emailTemplate')({
+        html: require('../util/emailTemplateOne')({
             req,
             senderEmail,
+            downloadLink: `${req.protocol}://${req.get('host')}/files/${uuid}`,
+            size: `${parseInt(file.size/1000)} KB`,
+            expires: '24 hours'
+        })
+    });
+
+    sendMail({ 
+        from: process.env.EMAIL_FROM, 
+        to: senderEmail, 
+        subject: 'LinkyShare File Sharing',
+        text: `You shared a file with ${receiverEmail}.`,
+        html: require('../util/emailTemplateTwo')({
+            req,
+            receiverEmail,
             downloadLink: `${req.protocol}://${req.get('host')}/files/${uuid}`,
             size: `${parseInt(file.size/1000)} KB`,
             expires: '24 hours'
