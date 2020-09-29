@@ -1,32 +1,7 @@
+const showlinkController = require('../controllers/showlinkController');
+
 const router = require('express').Router();
 
-const File = require('../models/fileModel');
-
-router.get('/:uuid', async (req,res) => {
-    try {
-        const file = await File.findOne({ uuid: req.params.uuid });
-        if (!file) {
-            res.status(200).render('download', {
-                title: 'Something went wrong',
-                error: 'Link has been expired.'
-            }); 
-        }
-        res.status(200).render('download', {
-            title: 'Download your files easily',
-            uuid: file.uuid,
-            fileName: file.fileName,
-            fileSize: file.size,
-            downloadLink: `${req.protocol}://${req.get('host')}/files/download/${file.uuid}`
-            // https://domain.com/files/download/141356ahf17463f-1yqfbas
-        });
-
-    } catch(err) {
-        console.log(err);
-        res.status(200).render('download', {
-            title: 'Something went wrong',
-            error: 'Something went wrong'
-        });
-    }
-});
+router.get('/:uuid', showlinkController.renderDownloadPage);
 
 module.exports = router;

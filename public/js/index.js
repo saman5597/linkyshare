@@ -69,8 +69,6 @@ if (emailForm) {
             receiverEmail: emailForm.elements['receiverEmail'].value
         }
 
-        emailForm[2].setAttribute('disabled', 'true');
-
         fetch(emailUrl, {
             method: "POST",
             headers: {
@@ -79,11 +77,15 @@ if (emailForm) {
             body: JSON.stringify(formData)
         }).then(res => res.json()).then(data => {
             if (data.status) {
+                emailForm[2].setAttribute('disabled', 'true');
                 shareContainer.style.display = 'none';
                 showToast(data.message);
             }
+            else {
+                showToast(data.message);
+                return;
+            }
         }).catch(err => {
-            console.log(err.message);
             showToast(err.message);
         });
     });

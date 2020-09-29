@@ -1,9 +1,7 @@
+const viewController = require('../controllers/viewController');
+
 const router = require('express').Router();
 
-router.get('/', (req,res) => {
-    res.status(200).render('index', {
-        title: 'Share your files easily'
-      });
-});
+router.get('/', viewController.renderHomePage);
 
 module.exports = router;

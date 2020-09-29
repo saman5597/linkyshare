@@ -7,8 +7,8 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cors = require('cors');
 const compression = require('compression');
-
 const AppErrorHandler = require('./util/errorHandler');
+const globalErrorHandler = require('./controllers/errorController');
 
 //Start express app
 const app = express();
@@ -69,5 +69,8 @@ app.all('*', (req, res, next) => {
     new AppErrorHandler(`Can't find ${req.originalUrl} on this server.`, 404)
   );
 });
+
+// Global Error Handling  Middleware
+app.use(globalErrorHandler);
 
 module.exports = app;

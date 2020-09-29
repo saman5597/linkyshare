@@ -71,7 +71,7 @@ export const showToast = (msg) => {
     toast.style.transform = 'translate(-50%,0)';
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
-        toast.style.transform = 'translate(-50%,100px)';
+        toast.style.transform = 'translate(-50%,300px)';
     }, 2000);
 };
 
