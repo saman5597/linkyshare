@@ -79,3 +79,13 @@ export const resetFileInput = () => {
     const fileInput = document.querySelector('#fileInput');
     fileInput.value = "";
 };
+
+export const validateEmail = (inputText,text) => {
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(!inputText.value.match(mailformat)) {
+        showToast(`${text}'s email address is invalid`);
+        return false;
+    } 
+    else 
+        return inputText.value;
+}

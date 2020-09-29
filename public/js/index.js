@@ -1,6 +1,6 @@
 /* eslint-disable */
 import '@babel/polyfill';
-import { uploadFile , resetFileInput, showToast } from './main';
+import { uploadFile , validateEmail, showToast } from './main';
 
 console.log("It's working");
 
@@ -61,12 +61,12 @@ if (copyBtn) {
 if (emailForm) {
     emailForm.addEventListener('submit', (e) => {
         e.preventDefault();
-
+        
         const url = fileUrlInput.value;
         const formData = {
             uuid : url.split('/').splice(-1, 1)[0],
-            senderEmail: emailForm.elements['senderEmail'].value,
-            receiverEmail: emailForm.elements['receiverEmail'].value
+            senderEmail: validateEmail(emailForm.elements['senderEmail'],"Sender"),
+            receiverEmail: validateEmail(emailForm.elements['receiverEmail'],"Receiver")
         }
 
         fetch(emailUrl, {
@@ -80,6 +80,7 @@ if (emailForm) {
                 emailForm[2].setAttribute('disabled', 'true');
                 shareContainer.style.display = 'none';
                 showToast(data.message);
+                window.location.reload();
             }
             else {
                 showToast(data.message);

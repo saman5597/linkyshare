@@ -26,10 +26,10 @@ exports.uploadFile = (req,res) => {
 
             // Validate request
             if (!req.file) {
-                res.status(400).json({ status: false, error : 'All fields are required!' });
+                return res.status(400).json({ status: false, error : 'All fields are required!' });
             }
             if(err) {
-                res.status(500).json({ status: false, error : err.message});
+                return res.status(500).json({ status: false, error : err.message});
             }
 
             // Store into Database
@@ -57,13 +57,13 @@ exports.sendEmail = async (req,res) => {
         const { uuid , senderEmail , receiverEmail } = req.body;
 
         if (!uuid || !senderEmail || !receiverEmail) {
-            res.status(400).json({ status: false, error : 'All fields are required!' });
+            return res.status(400).json({ status: false, message : 'All fields are required!' });
         }
 
         // Get data from database
         const file = await File.findOne({ uuid: uuid });
         if (file.senderEmail) {
-            res.status(409).json({ status: false, error : 'Email already sent!' });
+            return res.status(409).json({ status: false, message : 'Email already sent!' });
         }
 
         // Save sender email and receiver email in DB
