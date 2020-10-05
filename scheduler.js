@@ -12,7 +12,7 @@ async function fetchData() {
         for (const file of files) {
             try {
                 // Delete all those files ony by one from Storage and DB
-                fs.unlinkSync(file.path);
+                fs.unlinkSync(`./${file.path}`);
                 await file.remove();
                 console.log(`Successfully deleted ${file.fileName}`);
             } catch (err) {
